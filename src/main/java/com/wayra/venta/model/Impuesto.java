@@ -3,7 +3,6 @@ package com.wayra.venta.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.Size;
 
 
@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
  * 
  */
 
-@Entity
+@Entity // name = "impuesto"
 @Table(name = "impuesto", schema = "ventasdb")
 @NamedQuery(name="Impuesto.findAll", query="SELECT i FROM Impuesto i")
 public class Impuesto implements Serializable {
@@ -28,16 +28,16 @@ public class Impuesto implements Serializable {
 	
 	 @Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 @Basic(optional = false)
-	 @Column(name="idImpuesto")
+	 @Column(name="idimpuesto")
 	private int idImpuesto;
 	
 	 @Size(min = 1, max = 45)
-	@Column(name="tipoImpuesto")
+	@Column(name="tipoimpuesto")
 	private String tipoImpuesto;
 	
-	 @Size(min = 1, max = 45)
-	@Column(name="valorImpuesto")
+	
+	@Column(name="valorimpuesto")
+	 @DecimalMax("30.00")
 	private BigDecimal valorImpuesto;
 
 	public Impuesto() {
